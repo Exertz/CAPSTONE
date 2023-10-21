@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <meta charset="utf-8">
+      <title>Login Page</title>
+   </head>
+   <body>
+      <div class="container">
+         <div class="login-box">
+         <div class="title">
+            Welcome Back!
+         </div>
+         <div class="centered">
+         <p>To keep connected with us, please log in with your personal info.</p>
+         <form action="./scripts/authenticate.php" method="post" autocomplete="off" onsubmit="return validateForm()">
+            <div class="user-box">
+               <input type="text" id="email" name="email" required="" />
+               <label>Email</label>
+               <span id="email-error" class="error-message"></span> <!-- Error message for email -->
+             </div>
+             <div class="user-box">
+               <input type="password" name="password" id="password" required="" />
+               <label>Password</label>
+               <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+               <span id="password-error" class="error-message"></span> <!-- Error message for password -->
+             </div>
+            <div class="content">
+               <div class="pass-link">
+                  <a href="/forgot-password.html">Forgot password?</a>
+               </div>
+            </div>
+            <div class="field">
+               <input type="submit" value="Login">
+            </div>
+            <div class="signup-link">
+               Not a member? <a href="/pages/register.html">Signup now</a>
+            </div>
+         </form>
+      </div>
+      <script src="../capstone/scripts/script.js"></script>
+      <script>
+        function validateForm() {
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const emailError = document.getElementById("email-error");
+          const passwordError = document.getElementById("password-error");
+
+          if (!isValidEmail(email)) {
+            emailError.textContent = "Invalid email address";
+            alert("Invalid email address. Please check the email format.");
+            return false;
+          }
+        }
+
+        function isValidEmail(email) {
+          // Simple email validation, you can use a more robust validation if needed
+          const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}$/;
+          return emailPattern.test(email);
+        }
+      </script>
+   </body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+    <link rel="stylesheet" href="/pages/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <meta charset="utf-8">
+      <title>Register</title>
+   </head>
+   <body>
+      <div class="container">
+        <div class="title">Registration</div>
+         <div class="register-box">
+          <div class="content">
+            <form action="../scripts/register.php" method="POST" autocomplete="off">
+            <div class="user-box">
+              <input type="text" placeholder="Enter your first name" name="first_name" required>
+             </div>
+             <div class="user-box">
+              <input type="text" placeholder="Enter your last name" name="last_name" required>
+            </div>
+            <div class="user-box">
+              <input type="email" placeholder="Enter your email" name="email" required
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+              title="Please enter a valid email address.">
+            </div>
+            <div class="user-box">
+              <input type="text" placeholder="Put your Phone Number" name="phone_number" required>
+            </div>
+             <div class="user-box">
+              <input type="password" placeholder="Create your password" name="password" required>
+               <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
+             </div>
+             <div class="user-box">
+              <input type="password" placeholder="Confirm password" name="confirm_password" required>
+              <span class="password-toggle-icon confirm-toggle-icon"><i class="fas fa-eye"></i></span>
+            </div>
+            <div class="field">
+               <input type="submit" value="register">
+            </div>
+            <div class="login-link">
+              Already have an Account? <a href="/login.html">Login now</a>
+           </div>
+         </form>
+      </div>
+      <script>
+        const passwordField = document.querySelector("input[name='password']");
+        const confirmField = document.querySelector("input[name='confirm_password']");
+        const togglePassword = document.querySelector(".password-toggle-icon i");
+        const toggleConfirm = document.querySelector(".confirm-toggle-icon i");
+
+        togglePassword.addEventListener("click", function () {
+          togglePasswordFieldVisibility(passwordField, togglePassword);
+        });
+
+        toggleConfirm.addEventListener("click", function () {
+          togglePasswordFieldVisibility(confirmField, toggleConfirm);
+        });
+
+        function togglePasswordFieldVisibility(field, toggleElement) {
+          if (field.type === "password") {
+            field.type = "text";
+            toggleElement.classList.remove("fa-eye");
+            toggleElement.classList.add("fa-eye-slash");
+          } else {
+            field.type = "password";
+            toggleElement.classList.remove("fa-eye-slash");
+            toggleElement.classList.add("fa-eye");
+          }
+        }
+
+        function verifyPassword() {  
+          var pw = document.getElementById("pswd").value;  
+          //check empty password field  
+          if(pw == "") {  
+            document.getElementById("message").innerHTML = "**Fill the password please!";  
+            return false;  
+          }  
+
+          //minimum password length validation  
+          if(pw.length < 8) {  
+            document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";  
+            return false;  
+          }    
+
+          //maximum length of password validation  
+          if(pw.length > 15) {  
+            document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+            return false;  
+          } else {  
+            alert("Password is correct");  
+          }  
+        }  
+      </script>
+   </body>
+</html>
