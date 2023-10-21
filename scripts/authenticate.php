@@ -30,7 +30,7 @@ if ($conn->connect_error) {
   
   if ($row) {
     // User exists, go to the home page
-    header("Location: {$APP_URL}/home.html");
+    header("Location: {$APP_URL}./pages/home.html");
 } else {
     // User does not exist, go back to the login page
     header("Location: {$APP_URL}/login.html");
