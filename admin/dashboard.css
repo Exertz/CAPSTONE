@@ -53,3 +53,32 @@ th {
     background-color: #333;
     color: #fff;
 }
+
+/* Sidebar styles */
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333; /* Background color of the sidebar */
+    padding-top: 20px;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white; /* Text color for sidebar links */
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #555; /* Background color on hover */
+}
+
+/* Content area styles */
+.content {
+    margin-left: 250px; /* Adjust the margin to make space for the sidebar */
+    padding: 20px;
+}
