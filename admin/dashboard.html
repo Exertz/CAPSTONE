@@ -5,54 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../admin/dashboard.css">
     <title>Admin Dashboard</title>
-    <script>
-        // Function to load booking data dynamically
-        function loadBookingData() {
-            $.ajax({
-                type: "GET",
-                url: "get_bookings.php", // Path to your PHP script
-                dataType: "json",
-                success: function (data) {
-                    var tableBody = $("#booking-table tbody");
-                    tableBody.empty(); // Clear existing data
-
-                    // Iterate through the data and append rows to the table
-                    $.each(data, function (index, booking) {
-                        var row = "<tr><td>" + booking.name + "</td><td>" + booking.email + "</td><td>" + booking.date + "</td></tr>";
-                        tableBody.append(row);
-                    });
-                }
-            });
-        }
-
-        // Load booking data when the page loads
-        loadBookingData();
-
-        // You can also set an interval to periodically refresh the data
-        // setInterval(loadBookingData, 5000); // Refresh every 5 seconds
-    </script>
 </head>
 <body>
-    
-    <div class="navbar">
-        <div class="container">
+    <section class="layout">
+        <div class="sidebar"></div>
+        <div class="body">
+            <table id="booking-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- You can add rows of booking data here -->
+                    <tr>
+                        <td>John Doe</td>
+                        <td>johndoe@example.com</td>
+                        <td>2023-10-22</td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>janesmith@example.com</td>
+                        <td>2023-10-23</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
         </div>
-    </div>
-
-    <div class="container">
-        <h2>Booking Listing</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Booking Data</th>
-                    <th>Labels</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Add booking data here dynamically -->
-            </tbody>
-        </table>
-    </div>
+      </section>
 </body>
 </html>
