@@ -103,7 +103,7 @@
 
     /* Style the "Already have an Account?" link */
     .login-link a {
-        color: orange;
+        color: #FC5404;
         text-decoration: none;
         transition: color 0.3s;
     }

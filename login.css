@@ -134,13 +134,8 @@
       background-color: #FFA500; /* Change the hover color to a slightly different shade of orange */
   }
 
-  .signup-link {
-    margin-top: 50px;
-    color: white;
-  }
-  
   .signup-link a {
-    color: orange; /* Change the text color to orange */
+    color: #FC5404; /* Change the text color to orange */
     text-decoration: none;
     transition: color 0.3s;
   }
