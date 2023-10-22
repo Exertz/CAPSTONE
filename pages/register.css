@@ -1,120 +1,139 @@
-/* Reset some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Define global font styles */
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .container {
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* Style the registration box */
-  .register-box {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  .title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  /* Style the input fields */
-  .user-box {
-    position: relative;
-    margin-bottom: 20px;
-  }
-  
-  .user-box input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #333;
-    border: none;
-    border-bottom: 2px solid #333;
-    outline: none;
-    background: transparent;
-  }
-  
-  .user-box label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px 0;
-    font-size: 16px;
-    color: #333;
-    pointer-events: none;
-    transition: 0.5s;
-  }
-  
-  .user-box input:focus ~ label,
-  .user-box input:valid ~ label {
-    transform: translateY(-20px);
-    font-size: 14px;
-  }
-  
-  /* Style the password toggle icon */
-  .password-toggle-icon {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  
-  .password-toggle-icon i {
-    font-size: 18px;
-    line-height: 1;
-    color: #333;
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .password-toggle-icon i:hover {
-    color: #000;
-  }
-  
-  /* Style the "Already have an Account?" link */
-  .login-link a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-  
-  .login-link a:hover {
-    color: #000;
-  }
-  
-  /* Style the Register button */
-  .field input[type="submit"] {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 16px;
-    text-transform: uppercase;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  }
-  
-  .field input[type="submit"]:hover {
-    background-color: #000;
-  }
-  
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Define global font styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .container {
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Style the registration box */
+    .register-box {
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    /* Style the input fields */
+    .user-box {
+        position: relative;
+        margin-bottom: 20px;
+        background-color: transparent;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .user-box input::placeholder {
+        color: lightgray;
+    }
+
+    .user-box input {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: gray;
+        border: none;
+        background: transparent;
+    }
+
+    /* Change placeholder color to light gray */
+    .user-box input::placeholder {
+        color: gray;
+    }
+
+    .user-box label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px 0;
+        font-size: 16px;
+        color: gray;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+
+    .user-box input:focus ~ label,
+    .user-box input:valid ~ label {
+        transform: translateY(-20px);
+        font-size: 14px;
+    }
+
+    /* Style the password toggle icon */
+    .password-toggle-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+    .password-toggle-icon i {
+        font-size: 18px;
+        line-height: 1;
+        color: lightgray; /* Change the color to light gray */
+        transition: color 0.3s ease-in-out;
+    }
+
+    .password-toggle-icon i:hover {
+        color: #000;
+    }
+
+    /* Style the "Already have an Account?" link */
+    .login-link a {
+        color: orange;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .login-link a:hover {
+        color: #000;
+    }
+
+    /* Style the Register button */
+    .field input[type="submit"] {
+        background-color: orange;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .field input[type="submit"]:hover {
+        background-color: #FFA500; /* Change the hover color to a slightly different shade of orange */
+    }
+
+
+    body {
+        background-image: url('../images/KL.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+

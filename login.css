@@ -8,7 +8,10 @@
   /* Define global font styles */
   body {
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    background-image: url('./images/KL.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,7 +27,7 @@
   
   /* Style the login box */
   .login-box {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.8); /* Set a black background with 80% transparency */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -70,6 +73,7 @@
     transition: 0.5s;
   }
   
+  
   .user-box input:focus ~ label,
   .user-box input:valid ~ label {
     transform: translateY(-20px);
@@ -104,14 +108,18 @@
     transition: color 0.3s;
   }
   
+  .pass-link a {
+    color: orange; /* Change the text color to orange */
+  }
+  
   .pass-link a:hover,
   .signup-link a:hover {
     color: #000;
   }
   
-  /* Style the Sign In button */
+  /* Style the Register button */
   .field input[type="submit"] {
-    background-color: #333;
+    background-color: orange;
     color: #fff;
     padding: 10px 20px;
     font-size: 16px;
@@ -121,7 +129,18 @@
     border-radius: 5px;
     transition: background-color 0.3s;
   }
-  
+
   .field input[type="submit"]:hover {
-    background-color: #000;
+      background-color: #FFA500; /* Change the hover color to a slightly different shade of orange */
   }
+
+  .signup-link a {
+    color: orange; /* Change the text color to orange */
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .signup-link a:hover {
+    color: #000;
+  }
+  
