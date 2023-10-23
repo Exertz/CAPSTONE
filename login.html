@@ -23,8 +23,7 @@
              <div class="user-box">
                <input type="password" name="password" id="password" required="" />
                <label style="color: white;">Enter your Password</label>
-               <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
-               <span id="password-error" class="error-message"></span> <!-- Error message for password -->
+               <span class="password-toggle-icon" id="password-toggle" onclick="togglePasswordVisibility()"><i class="fas fa-eye"></i></span>
              </div>
             <div class="content">
                <div class="pass-link" style="color: #FD4A23;">
@@ -45,7 +44,6 @@
           const email = document.getElementById("email").value;
           const password = document.getElementById("password").value;
           const emailError = document.getElementById("email-error");
-          const passwordError = document.getElementById("password-error");
 
           if (!isValidEmail(email)) {
             emailError.textContent = "Invalid email address";
@@ -59,6 +57,19 @@
           const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zAZ0-9.-]+\.[a-zA-Z]{2,4}$/;
           return emailPattern.test(email);
         }
+
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("password");
+            const passwordToggleIcon = document.getElementById("password-toggle");
+
+            if (passwordInput.type === "password") {
+               passwordInput.type = "text";
+               passwordToggleIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+               passwordInput.type = "password";
+               passwordToggleIcon.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+         }
       </script>
    </body>
 </html>

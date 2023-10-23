@@ -12,9 +12,9 @@
           <div class="title">Registration</div>
           <p style="color: #fff;">Provide your details below to complete your registration and start connecting with us</p>
           <div class="content">
-            <form action="/scripts/register.php" method="POST" autocomplete="off">
+            <form id="registerForm" action="/scripts/register.php" method="POST" autocomplete="off">
             <div class="user-box">
-              <input type="text" placeholder="Enter your first name" name="full_name" required>
+              <input type="text" placeholder="Enter your full name" name="full_name" required>
              </div>
             <div class="user-box">
               <input type="email" placeholder="Enter your email" name="email_address" required
@@ -32,9 +32,14 @@
               <input type="password" placeholder="Confirm password" name="confirm_password" required>
               <span class="password-toggle-icon confirm-toggle-icon"><i class="fas fa-eye"></i></span>
             </div>
+            
+          <div id="message" style="color:red;">
+            
+          </div>
             <div class="field">
-              <input type="submit" value="Sign In" style="background-color: #FD4A23; color: white; padding: 10px 100px;">
+              <input id="btnSubmit" type="submit" onclick="verifyPassword()" value="Sign In" style="background-color: #FD4A23; color: white; padding: 10px 100px;">
             </div>
+            
             <div class="login-link">
               <a href="/login.html" style="color: #fff;">Already have an Account?<a href="/login.html" style="color: #FC5404;">Register Now</a>
           </div>
@@ -45,7 +50,8 @@
         const confirmField = document.querySelector("input[name='confirm_password']");
         const togglePassword = document.querySelector(".password-toggle-icon i");
         const toggleConfirm = document.querySelector(".confirm-toggle-icon i");
-
+        const btnSubmit = document.querySelector("#btnSubmit");
+        
         togglePassword.addEventListener("click", function () {
           togglePasswordFieldVisibility(passwordField, togglePassword);
         });
@@ -67,26 +73,31 @@
         }
 
         function verifyPassword() {  
-          var pw = document.getElementById("pswd").value;  
+          // var pw = document.getElementById("pswd").value;
           //check empty password field  
-          if(pw == "") {  
-            document.getElementById("message").innerHTML = "**Fill the password please!";  
-            return false;  
-          }  
+          // if(pw == "") {  
+          //   document.getElementById("message").innerHTML = "**Fill the password please!";  
+          //   return false;  
+          // }  
 
           //minimum password length validation  
-          if(pw.length < 8) {  
-            document.getElementById("message").innerHTML = "**Password length must be at least 8 characters";  
-            return false;  
-          }    
+          // if(pw.length < 8) {  
+          //   document.getElementById("message").innerHTML = "**Password length must be at least 8 characters";  
+          //   return false;  
+          // }    
 
           //maximum length of password validation  
-          if(pw.length > 15) {  
-            document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
-            return false;  
-          } else {  
-            alert("Password is correct");  
-          }  
+          // if(pw.length > 15) {  
+          //   document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
+          //   return false;  
+          // } else {  
+          //   alert("Password is correct");  
+          // } 
+          
+          if(passwordField.value != confirmField.value){
+            event.preventDefault();
+            document.getElementById("message").innerHTML = "**Confirm Password must match";
+          }
         }  
       </script>
    </body>

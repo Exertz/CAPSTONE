@@ -15,18 +15,18 @@ if ($conn->connect_error) {
 }
 
 // retreive data from form
-  echo $uri;
+
 
   $email = $_POST["email"];
   $password = $_POST["password"];
-  $sqlPrepare = "select * from users where email='$email' and password = 'MD5($password'))";
 
-  $stmt = $conn->prepare($sqlPrepare);
-  $stmt->execute();
+  $passwordHash = md5($password);
+  
+  $sql = "SELECT * FROM users WHERE `email_address` = '{$email}' AND `password` = '{$passwordHash}' ";
+  
+  $result = $conn->query($sql);
 
-  $result = $stmt->get_result();
   $row = $result->fetch_assoc();
-
   
   if ($row) {
     // User exists, go to the home page

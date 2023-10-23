@@ -14,8 +14,6 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sessionType = $_POST["SessionCategory"];
     $sessionDate = $_POST["SessionDate"];
-    $startTime = $_POST["StartTime"];
-    $endTime = $_POST["EndTime"];
     $serviceSelection = isset($_POST['ServiceSelection']) ? $_POST['ServiceSelection'] : ''; // Check if it's set
     $streetAddress = $_POST['StreetAddress'];
     $city = $_POST['City'];

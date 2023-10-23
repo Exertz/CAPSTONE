@@ -23,9 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phone_number = $_POST["phone_number"];
     $password = $_POST["password"];
 
+    // Add additional security measures like hashing the password (do not store plain text passwords)
+    $hashed_password = md5($password);
+
     // Insert user data into the database
     $sql = "INSERT INTO users (full_name, email_address, phone_number, password)
-            VALUES ('$full_name', '$email_address', '$phone_number', 'MD5($password'))";
+            VALUES ('$full_name', '$email_address', '$phone_number', '$hashed_password')";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: {$APP_URL}/login.html");
