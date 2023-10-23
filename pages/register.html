@@ -22,7 +22,7 @@
                    title="Please enter a valid email address (e.g., example@gmail.com, example@yahoo.com, example@hotmail.com).">
              </div>
              <div class="user-box">
-              <input type="tel" placeholder="Put your Phone Number" name="phone_number" required style="color: white;" oninput="clearCountryCode(this)">
+              <input type="tel" placeholder="Put your Phone Number" name="phone_number" required style="color: white;">
             </div>
               <div class="user-box">
                 <input type="password" placeholder="Create your password" name="password" required style="color: white;">
@@ -93,16 +93,6 @@
           // } else {  
           //   alert("Password is correct");  
           // } 
-          
-          function clearCountryCode(input) {
-            // Define the country code
-            const countryCode = "+63";
-
-            // Remove the country code if it's present at the beginning of the input
-            if (input.value.startsWith(countryCode)) {
-              input.value = input.value.substr(countryCode.length);
-            }
-          }
 
           function formatPhoneNumber(input) {
             // Remove any non-digit characters from the input
