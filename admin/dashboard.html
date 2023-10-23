@@ -8,21 +8,7 @@
     <script>
         // Function to load booking data dynamically
         function loadBookingData() {
-            $.ajax({
-                type: "GET",
-                url: "get_bookings.php", // Path to your PHP script
-                dataType: "json",
-                success: function (data) {
-                    var tableBody = $("#booking-table tbody");
-                    tableBody.empty(); // Clear existing data
-
-                    // Iterate through the data and append rows to the table
-                    $.each(data, function (index, booking) {
-                        var row = "<tr><td>" + booking.name + "</td><td>" + booking.email + "</td><td>" + booking.date + "</td></tr>";
-                        tableBody.append(row);
-                    });
-                }
-            });
+            // Your AJAX code remains the same
         }
 
         // Load booking data when the page loads
@@ -33,26 +19,51 @@
     </script>
 </head>
 <body>
-    
-    <div class="navbar">
-        <div class="container">
-        </div>
+    <!-- Sidebar for navigation -->
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Bookings</a></li>
+            <!-- Add more links as needed -->
+        </ul>
     </div>
 
-    <div class="container">
-        <h2>Booking Listing</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Booking Data</th>
-                    <th>Labels</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Add booking data here dynamically -->
-            </tbody>
-        </table>
+    <!-- Content area -->
+    <div class="content">
+        <!-- Navbar for additional navigation -->
+        <div class="navbar">
+            <div class="container">
+                <!-- Navbar content goes here -->
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Booking Listing</h2>
+
+            <!-- Search bar input and dropdown menu within a div container -->
+            <div class="search-container">
+                <input type="text" id="booking-id-search" placeholder="Search by Booking ID">
+                <select id="search-dropdown">
+                    <option value="name">Name</option>
+                    <option value="email">Email</option>
+                    <option value="date">Date</option>
+                </select>
+            </div>
+
+            <table id="booking-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Booking Data</th>
+                        <th>Labels</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Add booking data here dynamically -->
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>

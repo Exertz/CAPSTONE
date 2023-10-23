@@ -1,84 +1,95 @@
-/* Basic CSS for styling */
-body {
+/* Reset some default styles */
+body, h2, p {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
 }
 
-.navbar {
-    background-color: #333; /* Change the color to your preference */
-    color: #fff;
-    padding: 10px 0;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h1 {
-    color: #333; /* Text color */
-}
-
- /* CSS for the navbar */
- .navbar {
-    background-color: #1B0900;
-    color: #fff;
-    padding: 10px 0;
-}
-
-.navbar h1 {
-    margin: 0;
-    text-align: center;
-}
-
-/* You can add more styles for the dashboard elements here */
-
-/* Additional CSS for the booking table */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #333;
-    color: #fff;
-}
-
-/* Sidebar styles */
+/* Style the sidebar */
 .sidebar {
     height: 100%;
     width: 250px;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #333; /* Background color of the sidebar */
-    padding-top: 20px;
+    background-color: #333;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+}
+
+.sidebar li {
+    margin: 10px 0;
 }
 
 .sidebar a {
-    padding: 10px 15px;
     text-decoration: none;
-    font-size: 20px;
-    color: white; /* Text color for sidebar links */
-    display: block;
+    color: white;
 }
 
-.sidebar a:hover {
-    background-color: #555; /* Background color on hover */
-}
-
-/* Content area styles */
+/* Style the content area */
 .content {
-    margin-left: 250px; /* Adjust the margin to make space for the sidebar */
+    margin-left: 250px; /* Adjust this to match the sidebar width */
     padding: 20px;
+}
+
+/* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+/* Style the navbar (you can add more styles as needed) */
+.navbar {
+    background-color: #0074D9;
+    color: white;
+    padding: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Style the search container */
+.search-container {
+    display: flex;
+}
+
+/* Style the search bar */
+#booking-id-search {
+    flex: 1; /* Take up remaining space */
+    padding: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style the dropdown menu */
+#search-dropdown {
+    width: 100px; /* Set a fixed width or adjust as needed */
+    padding: 8px;
+    margin-left: 10px; /* Add some spacing between search bar and dropdown */
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
