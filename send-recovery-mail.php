@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-$connection = mysqli_connect("localhost", "root", "", "classicmodels");
+$connection = mysqli_connect("localhost", "root", "", "pvbdb");
 $email = $_POST["email"];
 
 $sql = "SELECT * FROM users WHERE email = '$email'";
