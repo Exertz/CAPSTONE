@@ -22,8 +22,9 @@
                    title="Please enter a valid email address (e.g., example@gmail.com, example@yahoo.com, example@hotmail.com).">
              </div>
              <div class="user-box">
-              <input type="tel" placeholder="Put your Phone Number" name="phone_number" required style="color: white;">
-            </div>
+              <input type="tel" placeholder="+63" name="country_code" required style="color: white; display: inline-block;" value="+63" readonly>
+              <input type="tel" placeholder="Your Phone Number" name="phone_number" required style="color: white; display: inline-block;" oninput="formatPhoneNumber(this);">
+            </div>            
               <div class="user-box">
                 <input type="password" placeholder="Create your password" name="password" required style="color: white;">
                 <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
@@ -33,66 +34,42 @@
                 <span class="password-toggle-icon confirm-toggle-icon"><i class="fas fa-eye"></i></span>
               </div>
             
-          <div id="message" style="color:red;">
-            
-          </div>
+          <div id="message" style="color:red;"></div>
             <div class="field">
               <input id="btnSubmit" type="submit" onclick="verifyPassword()" value="Sign In" style="background-color: #FD4A23; color: white; padding: 10px 100px;">
             </div>
             
             <div class="login-link">
-              <a href="/login.html" style="color: #fff;">Already have an Account?<a href="/login.html" style="color: #FC5404;">Register Now</a>
-          </div>
-         </form>
-      </div>
-      <script>
-        const passwordField = document.querySelector("input[name='password']");
-        const confirmField = document.querySelector("input[name='confirm_password']");
-        const togglePassword = document.querySelector(".password-toggle-icon i");
-        const toggleConfirm = document.querySelector(".confirm-toggle-icon i");
-        const btnSubmit = document.querySelector("#btnSubmit");
-        
-        togglePassword.addEventListener("click", function () {
-          togglePasswordFieldVisibility(passwordField, togglePassword);
-        });
+              <a href="/login.html" style="color: #fff;">Already have an Account?<a href="/login.html" style="color: #FC5404;"> Register Now</a>
+            </div>
+          </form>
+        </div>
+        <script>
+          const passwordField = document.querySelector("input[name='password']");
+          const confirmField = document.querySelector("input[name='confirm_password']");
+          const togglePassword = document.querySelector(".password-toggle-icon i");
+          const toggleConfirm = document.querySelector(".confirm-toggle-icon i");
+          const btnSubmit = document.querySelector("#btnSubmit");
+          
+          togglePassword.addEventListener("click", function () {
+            togglePasswordFieldVisibility(passwordField, togglePassword);
+          });
 
-        toggleConfirm.addEventListener("click", function () {
-          togglePasswordFieldVisibility(confirmField, toggleConfirm);
-        });
+          toggleConfirm.addEventListener("click", function () {
+            togglePasswordFieldVisibility(confirmField, toggleConfirm);
+          });
 
-        function togglePasswordFieldVisibility(field, toggleElement) {
-          if (field.type === "password") {
-            field.type = "text";
-            toggleElement.classList.remove("fa-eye");
-            toggleElement.classList.add("fa-eye-slash");
-          } else {
-            field.type = "password";
-            toggleElement.classList.remove("fa-eye-slash");
-            toggleElement.classList.add("fa-eye");
+          function togglePasswordFieldVisibility(field, toggleElement) {
+            if (field.type === "password") {
+              field.type = "text";
+              toggleElement.classList.remove("fa-eye");
+              toggleElement.classList.add("fa-eye-slash");
+            } else {
+              field.type = "password";
+              toggleElement.classList.remove("fa-eye-slash");
+              toggleElement.classList.add("fa-eye");
+            }
           }
-        }
-
-        function verifyPassword() {  
-          // var pw = document.getElementById("pswd").value;
-          //check empty password field  
-          // if(pw == "") {  
-          //   document.getElementById("message").innerHTML = "**Fill the password please!";  
-          //   return false;  
-          // }  
-
-          //minimum password length validation  
-          // if(pw.length < 8) {  
-          //   document.getElementById("message").innerHTML = "**Password length must be at least 8 characters";  
-          //   return false;  
-          // }    
-
-          //maximum length of password validation  
-          // if(pw.length > 15) {  
-          //   document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";  
-          //   return false;  
-          // } else {  
-          //   alert("Password is correct");  
-          // } 
 
           function formatPhoneNumber(input) {
             // Remove any non-digit characters from the input
@@ -102,11 +79,12 @@
             input.value = phoneNumber;
           }
 
-          if(passwordField.value != confirmField.value){
-            event.preventDefault();
-            document.getElementById("message").innerHTML = "**Confirm Password must match";
+          function verifyPassword() {
+            if (passwordField.value !== confirmField.value) {
+              event.preventDefault();
+              document.getElementById("message").innerHTML = "**Confirm Password must match";
+            }
           }
-        }  
-      </script>
-   </body>
-</html>
+        </script>
+      </body>
+    </html>

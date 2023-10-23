@@ -30,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if $serviceSelection is not empty
     if (!empty($serviceSelection)) {
         // Insert data into the database
-        $sql = "INSERT INTO booking (session_type, session_date, start_time, end_time, service_selection, street_address, city, payment_method)
-                VALUES ('$sessionType', '$sessionDate', '$startTime', '$endTime', '$serviceSelection', '$streetAddress', '$city', '$paymentMethod')";
+        $sql = "INSERT INTO booking (session_type, session_date, service_selection, street_address, city, payment_method)
+                VALUES ('$sessionType', '$sessionDate', '$serviceSelection', '$streetAddress', '$city', '$paymentMethod')";
 
         if ($conn->query($sql) === TRUE) {
             echo "Booking submitted successfully.";
