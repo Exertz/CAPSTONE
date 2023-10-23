@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 
   $email = $_POST["email"];
   $password = $_POST["password"];
-  $sqlPrepare = "select * from users where email='$email' and password = '$password' ";
+  $sqlPrepare = "select * from users where email='$email' and password = 'MD5($password'))";
 
   $stmt = $conn->prepare($sqlPrepare);
   $stmt->execute();
