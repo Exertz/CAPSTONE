@@ -14,9 +14,20 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
+// Validate the email using filter_var
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  header("Location: /login.html?login_error=invalid_email");
+  exit();
+}
+
+// Login failed, redirect back to the login page with an error message
+header("Location: /login.html?login_error=invalid_credentials");
+exit();
+} catch (Exception $e) {
+echo "Query Failed: " . $e->getMessage();
+}
+
 // retreive data from form
-
-
   $email = $_POST["email"];
   $password = $_POST["password"];
 
@@ -40,4 +51,5 @@ if ($conn->connect_error) {
 } catch(Exception $e) {
   echo "Query Failed: " . $e->getMessage();
 }
+
 ?>
