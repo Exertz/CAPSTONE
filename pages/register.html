@@ -22,9 +22,8 @@
                    title="Please enter a valid email address (e.g., example@gmail.com, example@yahoo.com, example@hotmail.com).">
              </div>
              <div class="user-box">
-              <input type="tel" placeholder="+63" name="country_code" required style="color: white; display: inline-block;" value="+63" readonly>
-              <input type="tel" placeholder="Your Phone Number" name="phone_number" required style="color: white; display: inline-block;" oninput="formatPhoneNumber(this);">
-            </div>            
+              <input type="text" placeholder="Your Phone Number" name="phone_number" required style="color: white;" oninput="formatPhoneNumber(this);">
+          </div>           
               <div class="user-box">
                 <input type="password" placeholder="Create your password" name="password" required style="color: white;">
                 <span class="password-toggle-icon"><i class="fas fa-eye"></i></span>
@@ -46,45 +45,33 @@
         </div>
         <script>
           const passwordField = document.querySelector("input[name='password']");
-          const confirmField = document.querySelector("input[name='confirm_password']");
-          const togglePassword = document.querySelector(".password-toggle-icon i");
-          const toggleConfirm = document.querySelector(".confirm-toggle-icon i");
-          const btnSubmit = document.querySelector("#btnSubmit");
-          
-          togglePassword.addEventListener("click", function () {
-            togglePasswordFieldVisibility(passwordField, togglePassword);
-          });
+  const confirmField = document.querySelector("input[name='confirm_password']");
+  const btnSubmit = document.querySelector("#btnSubmit");
 
-          toggleConfirm.addEventListener("click", function () {
-            togglePasswordFieldVisibility(confirmField, toggleConfirm);
-          });
+  let phoneNumberValue = "+63";
 
-          function togglePasswordFieldVisibility(field, toggleElement) {
-            if (field.type === "password") {
-              field.type = "text";
-              toggleElement.classList.remove("fa-eye");
-              toggleElement.classList.add("fa-eye-slash");
-            } else {
-              field.type = "password";
-              toggleElement.classList.remove("fa-eye-slash");
-              toggleElement.classList.add("fa-eye");
-            }
-          }
+  function formatPhoneNumber(input) {
+  // Remove any non-digit characters from the input
+  let cleanedPhoneNumber = input.value.replace(/\D/g, '');
+  
+  // Ensure the +63 prefix is at the beginning
+  if (!cleanedPhoneNumber.startsWith("63")) {
+    cleanedPhoneNumber = "63" + cleanedPhoneNumber;
+  }
+  
+  // Add the + prefix
+  phoneNumberValue = "+" + cleanedPhoneNumber;
+  
+  // Update the input value
+  input.value = phoneNumberValue;
+}
 
-          function formatPhoneNumber(input) {
-            // Remove any non-digit characters from the input
-            const phoneNumber = input.value.replace(/\D/g, '');
-            
-            // Update the input value with the cleaned phone number
-            input.value = phoneNumber;
-          }
-
-          function verifyPassword() {
-            if (passwordField.value !== confirmField.value) {
-              event.preventDefault();
-              document.getElementById("message").innerHTML = "**Confirm Password must match";
-            }
-          }
+  function verifyPassword() {
+    if (passwordField.value !== confirmField.value) {
+      event.preventDefault();
+      document.getElementById("message").innerHTML = "**Confirm Password must match";
+    }
+  }
         </script>
       </body>
     </html>
