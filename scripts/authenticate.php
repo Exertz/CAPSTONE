@@ -21,12 +21,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Login failed, redirect back to the login page with an error message
-header("Location: /login.html?login_error=invalid_credentials");
-exit();
+    header("Location: /login.html?login_error=invalid_credentials");
+    exit();
 } catch (Exception $e) {
-echo "Query Failed: " . $e->getMessage();
+    echo "Query Failed: " . $e->getMessage();
 }
-
 // retreive data from form
   $email = $_POST["email"];
   $password = $_POST["password"];
