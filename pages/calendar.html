@@ -12,7 +12,7 @@
 
 <body>
     <div class="container">
-            <div class="calendar">
+            <div id="calendar" class="calendar">
                 <!-- Move legends here -->
                  <div class="legends">
                     <div class="legend-item today"></div>
@@ -312,6 +312,14 @@
             currentRow.appendChild(dayElement);
 
 
+            document.addEventListener("mousedown", function (event) {
+                if (bookingForm.style.display === "block" && !bookingForm.contains(event.target)) {
+                    closeBookingForm();
+                }
+            });
+
+            bookingForm.addEventListener("mousedown", stopPropagation);
+
             if (dayOfWeek === 6) {
                 currentRow = document.createElement("tr");
                 daysElement.appendChild(currentRow);
@@ -353,6 +361,10 @@
             bookingForm.style.display = "none";
         }
 
+        function stopPropagation(event) {
+            event.stopPropagation();
+        }
+
         function nextMonth() {
             const nextMonth = selectedDate.getMonth() + 1;
             selectedDate.setMonth(nextMonth);
@@ -373,11 +385,16 @@
 
         function isPhilippinesHoliday(date) {
             const year = date.getFullYear();
-            const month = date.getMonth() + 1; // Month is zero-based, so add 1
+            const month = date.getMonth() + 1;
             const day = date.getDate();
             const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
             
-            return philippinesHolidays.includes(formattedDate);
+            if (philippinesHolidays.includes(formattedDate)) {
+                console.log(`Holiday found on ${formattedDate}`);
+                return true;
+            }
+            
+            return false;
         }
 
         // Function to populate session-category select options based on session-type

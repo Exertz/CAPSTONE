@@ -77,11 +77,6 @@
             position: relative;
         }
 
-        td.holiday {
-            background-color: red;
-            color: white; /* You can change text color for better visibility */
-        }
-        
         td:not(.past-date) {
             background-color: white; /* Change this to your preferred white color */
             color: black; /* Text color */
@@ -239,10 +234,6 @@
             width: 100%;
         }
         
-        .holiday {
-            background-color: red; /* You can use any color you prefer */
-            color: white; /* Text color for holidays */
-        }
         
         /* Legends */
         .legends {
@@ -267,4 +258,9 @@
 
         .legend-item.holiday {
             background-color: #ff5733; /* Red color for holidays */
+        }
+
+        #calendar td.holiday {
+            background-color: red; /* Background color for holidays */
+            color: white; /* Text color for holidays */
         }
