@@ -18,10 +18,13 @@
 
         /* Calendar styles */
         .calendar {
-            width: 100%;
-            max-width: 900px;
-            border-radius: 0px;
-            overflow: hidden;
+            /* Override the background color for the calendar */
+            background-color: #ffffff; /* Change to your preferred color (white) */
+        }
+        
+        .calendar table td.today {
+            background-color: #eeeeee; /* Change to your preferred color for today's date */
+            color: #000000; /* Change to your preferred text color for today's date */
         }
         
         /*.date-text-container{
@@ -254,10 +257,6 @@
 
         .legend-item.past-date {
             background-color: #ccc; /* Gray color for past dates */
-        }
-
-        .legend-item.holiday {
-            /* Remove background-color property */
         }
 
         .legend-item.holiday::before {
