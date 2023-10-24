@@ -101,6 +101,17 @@
             <input type="radio" id="online-payment" name="PaymentMethod" value="online" required>
             <label for="online-payment">GCash</label><br>
         </div>
+
+        <!-- Additional GCash booking form (Initially hidden) -->
+        <div id="gcash-booking-form" class="booking-form" style="display: none;">
+            <h2>GCash Information</h2> <!-- Add the title here -->
+        
+            <label for="account-name">Account Name:</label>
+            <input type="text" id="account-name" name="AccountName" class="booking-input" required><br><br>
+        
+            <label for="mobile-number">Mobile Number:</label>
+            <input type="text" id="mobile-number" name="MobileNumber" class="booking-input" required><br><br>
+        </div>
             <button type="book-now">Book</button>
         </div>
     </form>
@@ -137,7 +148,7 @@
         const onlinePaymentRadio = document.getElementById("online-payment");
         // const gcashOptions = document.getElementById("gcash-options");
         // const gcashBookingForm = document.getElementById("gcash-booking-form");
-
+        const gcashBookingForm = document.getElementById("gcash-booking-form");
         const selectedDate = new Date();
 
         const MONTHS = {
@@ -311,6 +322,18 @@
             dayElement.appendChild(dateTextContainer);
             currentRow.appendChild(dayElement);
 
+            // Event listener for the payment method radio buttons
+            document.querySelectorAll('input[type="radio"][name="PaymentMethod"]').forEach((radio) => {
+                radio.addEventListener("change", function () {
+                    if (this.value === "online") {
+                        // Show the GCash booking form
+                        gcashBookingForm.style.display = "block";
+                    } else {
+                        // Hide the GCash booking form
+                        gcashBookingForm.style.display = "none";
+                    }
+                });
+            });
 
             document.addEventListener("mousedown", function (event) {
                 if (bookingForm.style.display === "block" && !bookingForm.contains(event.target)) {
@@ -355,8 +378,16 @@
 
             // Set the value of the session-date input
             sessionDateInput.value = `${year}-${month}-${day}`;
+
+            // Access the GCash form input elements
+            const accountNameInput = document.getElementById("account-name");
+            const mobileNumberInput = document.getElementById("mobile-number");
+
+            // Clear the existing values
+            accountNameInput.value = "";
+            mobileNumberInput.value = "";
         }
-        
+
         function closeBookingForm() {
             bookingForm.style.display = "none";
         }

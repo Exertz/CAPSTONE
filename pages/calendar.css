@@ -257,10 +257,19 @@
         }
 
         .legend-item.holiday {
+            /* Remove background-color property */
+        }
+
+        .legend-item.holiday::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
             background-color: #ff5733; /* Red color for holidays */
+            margin-right: 10px;
         }
 
         #calendar td.holiday {
-            background-color: red; /* Background color for holidays */
+            background-color: #ff5733; /* Red color for holidays */
             color: white; /* Text color for holidays */
         }

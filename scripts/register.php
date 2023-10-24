@@ -15,6 +15,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Define an array of allowed email domains
+$allowedDomains = ['gmail.com', 'yahoo.com', 'hotmail.com'];
+
+// Extract the domain from the email address
+list($username, $domain) = explode('@', $email_address);
+
+// Check if the domain is in the list of allowed domains
+if (!in_array($domain, $allowedDomains)) {
+    // Domain is not allowed, so reject the registration
+    echo "Invalid email domain. Registration is restricted to specific domains.";
+} else {
+    // Continue with the registration process
+    // ... (insert user data into the database, etc.)
+}
+
 // Process user registration form
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
