@@ -6,6 +6,42 @@
     <link rel="stylesheet" href="../admin/dashboard.css">
     <title>Admin Dashboard</title>
     <script>
+        function loadBookingData() {
+            const bookingTableBody = document.getElementById("booking-table-body");
+
+            // Send an AJAX request to your PHP script to fetch booking data
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "fetch_booking_data.php", true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const bookingData = JSON.parse(xhr.responseText);
+
+                    // Clear the existing table data
+                    bookingTableBody.innerHTML = "";
+
+                    // Loop through the booking data and create table rows
+                    bookingData.forEach(function (booking) {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${booking.id}</td>
+                            <td>${booking.name}, ${booking.email}, ${booking.date}</td>
+                            <td>${booking.labels}</td>
+                        `;
+                        bookingTableBody.appendChild(row);
+                    });
+                }
+            };
+
+            xhr.send();
+        }
+
+        // Load booking data when the page loads
+        loadBookingData();
+
+        // You can also set an interval to periodically refresh the data
+        setInterval(loadBookingData, 5000); // Refresh every 5 seconds
+
         // Function to load booking data dynamically
         function loadBookingData() {
             // Your AJAX code remains the same
@@ -59,8 +95,8 @@
                         <th>Labels</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Add booking data here dynamically -->
+                <tbody id="booking-table-body">
+                    <!-- Booking data will be inserted here dynamically -->
                 </tbody>
             </table>
         </div>

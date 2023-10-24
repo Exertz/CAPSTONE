@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Query to retrieve booking data
-$sql = "SELECT name, email, date FROM bookings";
+$sql = "SELECT id, name, email, date, labels FROM bookings"; // Modify the SQL query to match your database structure
 $result = $conn->query($sql);
 
 // Create an array to store the booking data
