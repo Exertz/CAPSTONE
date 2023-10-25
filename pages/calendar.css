@@ -19,16 +19,14 @@
         /* Calendar styles */
         .calendar {
             /* Override the background color for the calendar */
-            background-color: #ffffff; /* Change to your preferred color (white) */
+            background-color: #808080; /* Change to your preferred color (white) */
+            max-width: 600px; /* Set the maximum width of the calendar */
+            margin: 0 auto; /* Center the calendar horizontally */
         }
         
         .calendar table td.today {
-            background-color: #eeeeee; /* Change to your preferred color for today's date */
+            background-color: #f2f2f2; /* Change to your preferred monochromatic color for today's date */
             color: #000000; /* Change to your preferred text color for today's date */
-        }
-        
-        /*.date-text-container{
-            color: red;
         }
         
         /* Month header styles */
@@ -36,7 +34,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #808080;
+            background-color: #01a9c1;
             color: white;
             padding: 25px;
             font-size: 24px;
@@ -68,6 +66,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            max-width: 100%; /* Set the maximum width for the table */
         }
 
         /* Table cell styles */
@@ -81,7 +80,7 @@
         }
 
         td:not(.past-date) {
-            background-color: white; /* Change this to your preferred white color */
+            background-color: #e0e0e0; /* Change this to your preferred monochromatic color for non-past dates */
             color: black; /* Text color */
         }
 
