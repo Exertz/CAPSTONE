@@ -11,16 +11,12 @@
         padding: 0;
       }
 
-      .body{
+      .body {
         box-sizing: border-box;
-     
       }
 
       .background-image {
         background: url(./images/KL.png) center/cover no-repeat fixed;
-        /* background-size: cover;
-        background-repeat: no-repeat; */
-        
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -41,19 +37,26 @@
       .button-container {
         margin-top: 20px;
         display: flex;
-        justify-content: center; /* Horizontally center the content */
-        align-items: center; /* Vertically center the content */
+        justify-content: center;
+        align-items: center;
       }
 
       .btn-register {
-        padding: 15px 40px; /* Increase padding to make it larger */
-        border-radius: 15px; /* Add a border-radius for rounded corners */
+        padding: 15px 40px;
+        border-radius: 15px;
       }
 
       .footer {
-        background-color: #131316; /* Set the background color to #131316 */
-        color: white; /* Text color */
+        background-color: #131316;
+        color: white;
         padding: 20px;
+        text-align: center;
+      }
+
+      /* Add styles to expand the container */
+      .container {
+        background-color: black;
+        padding: 20vh 0;
         text-align: center;
       }
     </style>
@@ -63,13 +66,7 @@
       <div class="container-1 d-flex mt-5">
         <!-- Centering container -->
         <h1
-          style="
-            background-color: transparent;
-            font-size: 3rem;
-            padding-inline: 16%;
-            text-align: center;
-          "
-        >
+          style=" background-color: transparent; font-size: 3rem; padding-inline: 16%; text-align: center;">
           Transform your vision into reality:
           <br>
           <span style="color: #fc5404">REGISTER NOW!</span> to Book
@@ -78,16 +75,7 @@
         <div class="button-container">
           <button
             class="btn btn-primary btn-register"
-            style="
-              background-color: #fb7434;
-              margin-block: 2rem;
-              color: rgb(230, 233, 235);
-              font-weight: 600;
-              font-size: 1.2rem;
-              border: none;
-              border-radius: 30px;
-            "
-          >
+            style="background-color: #fb7434; margin-block: 2rem; color: rgb(230, 233, 235);font-weight: 600; font-size: 1.2rem; border: none; border-radius: 30px;">
             REGISTER
           </button>
         </div>
@@ -103,8 +91,7 @@
 
     <div
       class="container"
-      style="background-color: black; padding: 20vh; text-align: center"
-    >
+      style="background-color: black; padding: 20vh; text-align: center">
       <h2 style="color: white">Services Offer</h2>
       <p style="color: white">
         At Norlitz Bato Films, we understand the importance of life's special
@@ -115,11 +102,6 @@
         moments with us.
       </p>
     </div>
-
-    <div
-      class="container-2"
-      style="background-color: red; padding: 100vh"
-    ></div>
 
     <!-- Footer -->
     <footer class="footer">
