@@ -57,10 +57,10 @@
 <body>
     <!-- Sidebar for navigation -->
     <div class="sidebar">
-        <h2>Admin Dashboard</h2>
         <ul>
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Bookings</a></li>
+            <li><a href="#">Booking Management</a></li>
+            <li><a href="#">Booking Approval</a></li>
+            <li><a href="#">Report and Analytics</a></li>
             <!-- Add more links as needed -->
         </ul>
     </div>
@@ -81,6 +81,7 @@
             <div class="search-container">
                 <input type="text" id="booking-id-search" placeholder="Search by Booking ID">
                 <select id="search-dropdown">
+                    <option value="" disabled selected>Select Type</option>
                     <option value="name">Name</option>
                     <option value="email">Email</option>
                     <option value="date">Date</option>
