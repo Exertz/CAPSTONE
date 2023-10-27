@@ -1,60 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Calendar</title>
-    <!-- Include Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./calendar.css">
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+
+        .calendar {
+            max-width: 900px;
+            /* margin: 0 auto; Removed margin */
+        }
+
+        .month {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: black;
+            color: white;
+            padding: 25px;
+            font-size: 24px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: center;
+            padding: 18px;
+            font-size: 20px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+        }
+
+        .selected {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .past-date {
+            background-color: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+        /* Style for select box */
+        #session-type {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .select{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Common styles for input fields */
+        #name,
+        #email,
+        #address,
+        #phone-number {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        /* Booking Form styles */
+        .booking-form {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 30px; /* Increase the padding for more space inside the form */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 4;
+            max-width: 500px; /* Increase the maximum width to make the form wider */
+            height: 630px;
+        }
+
+        /* Additional styles for the form container */
+        .booking-form {
+            background-color: black;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        /* Heading styles for the booking form */
+        .booking-form h2 {
+            margin-top: 0;
+            color: white;
+        }
+
+        /* CSS for consistent input sizes */
+        .booking-input {
+            width: 100%;
+            padding: 12px; /* Increase the padding for larger size */
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .booking-form label {
+            color: white;
+        }
+
+        /* Additional CSS for select elements */
+        .select {
+            width: 100%; /* Set the width as needed */
+            padding: 5px; /* Add padding as needed */
+            margin-bottom: 10px; /* Add margin between select elements */
+        }
+
+        /* Style for select box */
+        #session-type {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Style for the session date input text */
+        #session-date {
+            color: white;
+        }
+
+        .select{
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Common styles for input fields */
+        #name,
+        #email,
+        #address,
+        #phone-number {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Close button styles */
+        #close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        #close-button:hover {
+            color: white;
+        }
+
+        /* Container for date text */
+        .date-text-container {
+            cursor: pointer;
+        }
+
+        /* Additional styles for the layout adjustments */
+        .location-inputs {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .location-inputs input {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .legends {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .legend-item {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .legend-item.today {
+            background-color: white; 
+        }
+
+        .legend-item.past-date {
+            background-color: gray; 
+        }
+
+        .legend-item .holiday{
+            background-color: red;
+        }
+
+        .legend-item.holiday::before {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: red; 
+            margin-right: 10px;
+        }
+
+        /* Add this CSS for the booking button */
+        #book-now {
+            float: right; /* Float the button to the right */
+            background-color: #E35F20;
+            color: white;
+            padding: 10px 10px; /* Increase padding for larger size */
+            font-size: 24px; /* Increase font size for larger text */
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add a smooth color transition */
+        }
+
+        #book-now:hover {
+            background-color: #D64E1E; /* Change the background color on hover */
+        }
+
+        /* Add these styles to make the input fields and select elements larger */
+        .larger-input {
+            font-size: 18px; /* Increase the font size as needed */
+            padding: 12px;   /* Increase the padding as needed */
+        }
+
+    </style>
 </head>
-
 <body>
-    <div class="container">
-            <div id="calendar" class="calendar">
-                <!-- Move legends here -->
-                 <div class="legends">
-                    <div class="legend-item today"></div>
-                    <div class="legend-text">Today</div>
-                    <div class="legend-item past-date"></div>
-                    <div class="legend-text">Past Date</div>
-                    <div class="legend-item holiday"></div>
-                    <div class="legend-text">Holiday</div>
-                </div> 
-                <!-- Back to Homepage Button -->
-        <div class="container mt-3">
-            <a href="./home.html" class="btn btn-primary">Back to Homepage</a>
+    <div id="calendar" class="calendar">
+        <!-- Move legends here -->
+        <div class="legends">
+            <div class="legend-item today"></div>
+            <div class="legend-text">Today</div>
+            <div class="legend-item past-date"></div>
+            <div class="legend-text">Past Date</div>
+            <div class="legend-item holiday"></div>
+            <div class="legend-text">Holiday</div>
+        </div> 
+        <div class="month">
+            <div class="prev" onclick="previousMonth()">&#8249;</div>
+            <div class="current-month"></div>
+            <div class="next" onclick="nextMonth()">&#8250;</div>
         </div>
-                <div class="month">
-                    <div class="prev" onclick="previousMonth()">&#8249;</div>
-                    <div class="current-month"></div>
-                    <div class="next" onclick="nextMonth()">&#8250;</div>
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <thead>
-                            <th>Sun</th>
-                            <th>Mon</th>
-                            <th>Tue</th>
-                            <th>Wed</th>
-                            <th>Thu</th>
-                            <th>Fri</th>
-                            <th>Sat</th>
-                        </thead>
-                    </thead>
-                    <tbody class="days">
-                        <!-- Calendar dates will be added here -->
-                    </tbody>
-                </table>
-            </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody class="days"></tbody>
+        </table>
     </div>
-
     <!-- Booking Form (Initially hidden) -->
     <form action="../scripts/process_booking.php" method="POST">
         <div id="booking-form" class="booking-form">
             <span id="close-button" onclick="closeBookingForm()">&times;</span>
-            <h2>SESSION INFORMATION</h2>
+            <h2>Booking Details</h2>
             <label for="session-type">Session Type</label>
             <select id="session-type"  required>
                 <option value="" disabled selected>Select Type</option>
@@ -112,15 +363,9 @@
             <label for="mobile-number">Mobile Number:</label>
             <input type="text" id="mobile-number" name="MobileNumber" class="booking-input" required><br><br>
         </div>
-            <button type="book-now">Book</button>
+            <button type="submit" id="book-now">Sumbit</button>
         </div>
     </form>
-
-    <!-- Include Bootstrap JS and Popper.js (for Bootstrap) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
         const daysElement = document.querySelector(".days");
         const currentMonthElement = document.querySelector(".current-month");
@@ -306,7 +551,8 @@
                 dayElement.classList.add("past-date");
                 // Disable click event for past dates
                 dateTextContainer.style.pointerEvents = "none";
-            } else if (isHoliday) {
+            } 
+            else if (isHoliday) {
                 dayElement.classList.add("holiday");
             } else {
                 // Add a click event listener to open the booking form for future dates
