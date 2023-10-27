@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Calendar</title>
     <style>
-        /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -13,6 +12,18 @@
             align-items: center; /* Center vertically */
             height: 100vh; /* Full viewport height */
             margin: 0; /* Remove default margin */
+            background: black;
+        }
+
+        .date-text-container {
+            color: #6C757D;
+        }
+
+        /* Container for the calendar and menu */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .calendar {
@@ -30,7 +41,8 @@
             font-size: 24px;
         }
 
-        .prev, .next {
+        .prev,
+        .next {
             cursor: pointer;
             font-size: 20px;
         }
@@ -40,11 +52,14 @@
             border-collapse: collapse;
         }
 
+        /* Uniform cell widths for calendar */
         th, td {
             text-align: center;
             padding: 18px;
             font-size: 20px;
-            border: 1px solid #ccc;
+            background-color: white;
+            border: 1px solid black;
+            width: 14.2857%; /* Set an equal width for all cells (100% / 7 days) */
         }
 
         th {
@@ -58,10 +73,11 @@
         }
 
         .past-date {
-            background-color: #ccc;
-            color: #888;
+            background-color: #353637;
+            color: #353637;
             cursor: not-allowed;
         }
+
         /* Style for select box */
         #session-type {
             width: 100%;
@@ -217,6 +233,10 @@
             display: flex;
             align-items: center;
             margin: 20px 0;
+        }
+
+        .legend-text{
+            color: white;
         }
 
         .legend-item {
@@ -508,95 +528,94 @@
         })
 
         function generateCalendar(date) {
-        daysElement.innerHTML = "";
-        const year = date.getFullYear();
-        const month = date.getMonth();
+    daysElement.innerHTML = "";
+    const year = date.getFullYear();
+    const month = date.getMonth();
 
-        currentMonthElement.textContent = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    currentMonthElement.textContent = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
-        const today = new Date();
-        const firstDayOfMonth = new Date(year, month, 1);
-        const lastDayOfMonth = new Date(year, month + 1, 0);
-        const totalDays = lastDayOfMonth.getDate();
+    const today = new Date();
+    const firstDayOfMonth = new Date(year, month, 1);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const totalDays = lastDayOfMonth.getDate();
 
-        let currentDay = 1;
+    let currentDay = 1;
 
-        let currentRow = document.createElement("tr");
-        daysElement.appendChild(currentRow);
+    let currentRow = document.createElement("tr");
+    daysElement.appendChild(currentRow);
 
-        for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
-            // Fill in leading empty cells with blanks
-            const dayElement = document.createElement("td");
+    for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
+        // Fill in leading empty cells with blanks
+        const dayElement = document.createElement("td");
+        dayElement.classList.add("past-date");
+        currentRow.appendChild(dayElement);
+    }
+
+    while (currentDay <= totalDays) {
+        const currentDate = new Date(year, month, currentDay);
+        const dayOfWeek = currentDate.getDay();
+        const dayElement = document.createElement("td");
+        const isHoliday = isPhilippinesHoliday(currentDate);
+
+        // Create a container for the date text
+        const dateTextContainer = document.createElement("div");
+        dateTextContainer.className = "date-text-container";
+
+        // Check if the date is today's date
+        if (currentDate.toDateString() === today.toDateString()) {
+            dateTextContainer.classList.add("today");
+            // Add a click event listener to open the booking form for today's date
+            dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
+        } else if (currentDate < today) {
+            // Check if the date is in the past
             dayElement.classList.add("past-date");
-            currentRow.appendChild(dayElement);
+            // Disable click event for past dates
+            dateTextContainer.style.pointerEvents = "none";
+        } else if (isHoliday) {
+            dayElement.classList.add("holiday"); // Add a class for holiday
+        } else {
+            // Add a click event listener to open the booking form for future dates
+            dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
         }
 
-        while (currentDay <= totalDays) {
-            const currentDate = new Date(year, month, currentDay);
-            const dayOfWeek = currentDate.getDay();
-            const dayElement = document.createElement("td");
-            const isHoliday = isPhilippinesHoliday(currentDate);
+        // Create a span for each date
+        const dateSpan = document.createElement("span");
+        dateSpan.textContent = currentDay;
 
-            // Create a container for the date text
-            const dateTextContainer = document.createElement("div");
-            dateTextContainer.className = "date-text-container";
+        // Add the date text and text container to the cell
+        dateTextContainer.appendChild(dateSpan);
+        dayElement.appendChild(dateTextContainer);
+        currentRow.appendChild(dayElement);
 
-            // Check if the date is today's date
-            if (currentDate.toDateString() === today.toDateString()) {
-                dateTextContainer.classList.add("today");
-                // Add a click event listener to open the booking form for today's date
-                dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
-            } else if (currentDate < today) {
-                // Check if the date is in the past
-                dayElement.classList.add("past-date");
-                // Disable click event for past dates
-                dateTextContainer.style.pointerEvents = "none";
-            } 
-            else if (isHoliday) {
-                dayElement.classList.add("holiday");
-            } else {
-                // Add a click event listener to open the booking form for future dates
-                dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
-            }
-
-            // Create a span for each date
-            const dateSpan = document.createElement("span");
-            dateSpan.textContent = currentDay;
-
-            // Add the date text and text container to the cell
-            dateTextContainer.appendChild(dateSpan);
-            dayElement.appendChild(dateTextContainer);
-            currentRow.appendChild(dayElement);
-
-            // Event listener for the payment method radio buttons
-            document.querySelectorAll('input[type="radio"][name="PaymentMethod"]').forEach((radio) => {
-                radio.addEventListener("change", function () {
-                    if (this.value === "online") {
-                        // Show the GCash booking form
-                        gcashBookingForm.style.display = "block";
-                    } else {
-                        // Hide the GCash booking form
-                        gcashBookingForm.style.display = "none";
-                    }
-                });
-            });
-
-            document.addEventListener("mousedown", function (event) {
-                if (bookingForm.style.display === "block" && !bookingForm.contains(event.target)) {
-                    closeBookingForm();
+        // Event listener for the payment method radio buttons
+        document.querySelectorAll('input[type="radio"][name="PaymentMethod"]').forEach((radio) => {
+            radio.addEventListener("change", function () {
+                if (this.value === "online") {
+                    // Show the GCash booking form
+                    gcashBookingForm.style.display = "block";
+                } else {
+                    // Hide the GCash booking form
+                    gcashBookingForm.style.display = "none";
                 }
             });
+        });
 
-            bookingForm.addEventListener("mousedown", stopPropagation);
-
-            if (dayOfWeek === 6) {
-                currentRow = document.createElement("tr");
-                daysElement.appendChild(currentRow);
+        document.addEventListener("mousedown", function (event) {
+            if (bookingForm.style.display === "block" && !bookingForm.contains(event.target)) {
+                closeBookingForm();
             }
+        });
 
-            currentDay++;
+        bookingForm.addEventListener("mousedown", stopPropagation);
+
+        if (dayOfWeek === 6) {
+            currentRow = document.createElement("tr");
+            daysElement.appendChild(currentRow);
         }
+
+        currentDay++;
     }
+}
         
         function toggleBookingForm() {
             if (bookingForm.style.display === "block") {
