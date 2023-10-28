@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sessionType = $_POST["SessionCategory"];
     $sessionDate = $_POST["SessionDate"];
-    $serviceSelection = isset($_POST['ServiceSelection']) ? $_POST['ServiceSelection'] : ''; // Check if it's set
+    $eventservice = isset($_POST['EventService']) ? $_POST['EventService'] : ''; // Check if it's set
     $streetAddress = $_POST['StreetAddress'];
     $city = $_POST['City'];
     $paymentMethod = $_POST['PaymentMethod'];
@@ -30,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if $serviceSelection is not empty
     if (!empty($serviceSelection)) {
         // Insert data into the database
-        $sql = "INSERT INTO booking (session_type, session_date, service_selection, street_address, city, payment_method)
-                VALUES ('$sessionType', '$sessionDate', '$serviceSelection', '$streetAddress', '$city', '$paymentMethod')";
+        $sql = "INSERT INTO booking (session_type, session_date, event_service, street_address, city, payment_method)
+                VALUES ('$sessionType', '$sessionDate', '$eventservice', '$streetAddress', '$city', '$paymentMethod')";
 
         if ($conn->query($sql) === TRUE) {
             echo "Booking submitted successfully.";

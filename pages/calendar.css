@@ -1,0 +1,288 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background: black;
+}
+
+.date-text-container {
+    color: #6C757D;
+}
+
+/* Container for the calendar and menu */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calendar {
+    max-width: 900px;
+    /* margin: 0 auto; Removed margin */
+}
+
+.month {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 25px;
+    font-size: 24px;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Uniform cell widths for calendar */
+th, td {
+    text-align: center;
+    padding: 18px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid black;
+    width: 14.2857%; /* Set an equal width for all cells (100% / 7 days) */
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+.selected {
+    background-color: #3498db;
+    color: white;
+}
+
+.past-date {
+    background-color: #353637;
+    color: #353637;
+    cursor: not-allowed;
+}
+
+/* Style for select box */
+#session-type {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.select{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Common styles for input fields */
+#name,
+#email,
+#address,
+#phone-number {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Booking Form styles */
+.booking-form {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 30px; /* Increase the padding for more space inside the form */
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    max-width: 500px; /* Increase the maximum width to make the form wider */
+    height: 630px;
+}
+
+/* Additional styles for the form container */
+.booking-form {
+    background-color: black;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+}
+
+/* Heading styles for the booking form */
+.booking-form h2 {
+    margin-top: 0;
+    color: white;
+}
+
+/* CSS for consistent input sizes */
+.booking-input {
+    width: 100%;
+    padding: 12px; /* Increase the padding for larger size */
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.booking-form label {
+    color: white;
+}
+
+/* Additional CSS for select elements */
+.select {
+    width: 100%; /* Set the width as needed */
+    padding: 5px; /* Add padding as needed */
+    margin-bottom: 10px; /* Add margin between select elements */
+}
+
+/* Style for select box */
+#session-type {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Style for the session date input text */
+#session-date {
+    color: white;
+}
+
+.select{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Common styles for input fields */
+#name,
+#email,
+#address,
+#phone-number {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Close button styles */
+#close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+#close-button:hover {
+    color: white;
+}
+
+/* Container for date text */
+.date-text-container {
+    cursor: pointer;
+}
+
+/* Additional styles for the layout adjustments */
+.location-inputs {
+    display: flex;
+    justify-content: space-between;
+}
+
+.location-inputs input {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.legends {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.legend-text{
+    color: white;
+    margin-right: 20px; /* Add margin to legend text */
+}
+
+.legend-item {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.legend-item.today {
+    background-color: white; 
+}
+
+.legend-item.past-date {
+    background-color: #353637; 
+}
+
+.legend-item .holiday{
+    background-color: red;
+}
+
+.legend-item.holiday::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: red; 
+    margin-right: 10px;
+}
+
+.holiday {
+    background-color: red !important;
+    color: white;
+}
+
+/* Add this CSS for the booking button */
+#book-now {
+    float: right; /* Float the button to the right */
+    background-color: #E35F20;
+    color: white;
+    padding: 10px 10px; /* Increase padding for larger size */
+    font-size: 24px; /* Increase font size for larger text */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a smooth color transition */
+}
+
+#book-now:hover {
+    background-color: #D64E1E; /* Change the background color on hover */
+}
+
+/* Add these styles to make the input fields and select elements larger */
+.larger-input {
+    font-size: 18px; /* Increase the font size as needed */
+    padding: 12px;   /* Increase the padding as needed */
+}

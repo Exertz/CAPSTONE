@@ -2,299 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="./calendar.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Calendar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            height: 100vh; /* Full viewport height */
-            margin: 0; /* Remove default margin */
-            background: black;
-        }
-
-        .date-text-container {
-            color: #6C757D;
-        }
-
-        /* Container for the calendar and menu */
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .calendar {
-            max-width: 900px;
-            /* margin: 0 auto; Removed margin */
-        }
-
-        .month {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: black;
-            color: white;
-            padding: 25px;
-            font-size: 24px;
-        }
-
-        .prev,
-        .next {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        /* Uniform cell widths for calendar */
-        th, td {
-            text-align: center;
-            padding: 18px;
-            font-size: 20px;
-            background-color: white;
-            border: 1px solid black;
-            width: 14.2857%; /* Set an equal width for all cells (100% / 7 days) */
-        }
-
-        th {
-            background-color: black;
-            color: white;
-        }
-
-        .selected {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .past-date {
-            background-color: #353637;
-            color: #353637;
-            cursor: not-allowed;
-        }
-
-        /* Style for select box */
-        #session-type {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .select{
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Common styles for input fields */
-        #name,
-        #email,
-        #address,
-        #phone-number {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        
-        /* Booking Form styles */
-        .booking-form {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 30px; /* Increase the padding for more space inside the form */
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-            z-index: 4;
-            max-width: 500px; /* Increase the maximum width to make the form wider */
-            height: 630px;
-        }
-
-        /* Additional styles for the form container */
-        .booking-form {
-            background-color: black;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            overflow-y: auto;
-        }
-
-        /* Heading styles for the booking form */
-        .booking-form h2 {
-            margin-top: 0;
-            color: white;
-        }
-
-        /* CSS for consistent input sizes */
-        .booking-input {
-            width: 100%;
-            padding: 12px; /* Increase the padding for larger size */
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        .booking-form label {
-            color: white;
-        }
-
-        /* Additional CSS for select elements */
-        .select {
-            width: 100%; /* Set the width as needed */
-            padding: 5px; /* Add padding as needed */
-            margin-bottom: 10px; /* Add margin between select elements */
-        }
-
-        /* Style for select box */
-        #session-type {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Style for the session date input text */
-        #session-date {
-            color: white;
-        }
-
-        .select{
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Common styles for input fields */
-        #name,
-        #email,
-        #address,
-        #phone-number {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        /* Close button styles */
-        #close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 20px;
-            transition: color 0.3s ease;
-        }
-
-        #close-button:hover {
-            color: white;
-        }
-
-        /* Container for date text */
-        .date-text-container {
-            cursor: pointer;
-        }
-
-        /* Additional styles for the layout adjustments */
-        .location-inputs {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .location-inputs input {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        .legends {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .legend-text{
-            color: white;
-            margin-right: 20px; /* Add margin to legend text */
-        }
-
-        .legend-item {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
-
-        .legend-item.today {
-            background-color: white; 
-        }
-
-        .legend-item.past-date {
-            background-color: #353637; 
-        }
-
-        .legend-item .holiday{
-            background-color: red;
-        }
-
-        .legend-item.holiday::before {
-            content: "";
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-color: red; 
-            margin-right: 10px;
-        }
-
-        .holiday {
-            background-color: red !important;
-            color: white;
-        }
-
-        /* Add this CSS for the booking button */
-        #book-now {
-            float: right; /* Float the button to the right */
-            background-color: #E35F20;
-            color: white;
-            padding: 10px 10px; /* Increase padding for larger size */
-            font-size: 24px; /* Increase font size for larger text */
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease; /* Add a smooth color transition */
-        }
-
-        #book-now:hover {
-            background-color: #D64E1E; /* Change the background color on hover */
-        }
-
-        /* Add these styles to make the input fields and select elements larger */
-        .larger-input {
-            font-size: 18px; /* Increase the font size as needed */
-            padding: 12px;   /* Increase the padding as needed */
-        }
-
-    </style>
 </head>
 <body>
     <div id="calendar" class="calendar">
@@ -343,11 +53,6 @@
                 <!-- Add more options as needed -->
             </select><br><br>
             
-            <label for="session-category">Session Category</label>
-            <select class="select" id="session-category" name="SessionCategory" required>
-                <!-- Add more options as needed -->
-            </select><br><br>
-
             <label for="session-date">Session Date</label>
             <input type="date" id="session-date" name="SessionDate" class="booking-input" required disabled><br><br>
 
@@ -365,8 +70,12 @@
             <div>
                 <div class="location-inputs">
                     <input type="text" id="street-address" name="StreetAddress" placeholder="Street Address" class="booking-input" required style="width: 30%;">
-                    <input type="text" id="city" name="City" placeholder="City" class="booking-input" required style="width: 30%;">
             </div>
+
+            <label for="event-service">Event Service</label>
+            <select class="select" id="event-service" name="EventService" required>
+                <!-- Add more options as needed -->
+            </select><br><br>
 
             <!-- Add the payment-related label and options -->
         <label for="payment-method">How would you like to do the payment?</label>
@@ -534,94 +243,94 @@
         })
 
         function generateCalendar(date) {
-    daysElement.innerHTML = "";
-    const year = date.getFullYear();
-    const month = date.getMonth();
+            daysElement.innerHTML = "";
+            const year = date.getFullYear();
+            const month = date.getMonth();
 
-    currentMonthElement.textContent = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+            currentMonthElement.textContent = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
 
-    const today = new Date();
-    const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
-    const totalDays = lastDayOfMonth.getDate();
+            const today = new Date();
+            const firstDayOfMonth = new Date(year, month, 1);
+            const lastDayOfMonth = new Date(year, month + 1, 0);
+            const totalDays = lastDayOfMonth.getDate();
 
-    let currentDay = 1;
+            let currentDay = 1;
 
-    let currentRow = document.createElement("tr");
-    daysElement.appendChild(currentRow);
-
-    for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
-        // Fill in leading empty cells with blanks
-        const dayElement = document.createElement("td");
-        dayElement.classList.add("past-date");
-        currentRow.appendChild(dayElement);
-    }
-
-    while (currentDay <= totalDays) {
-        const currentDate = new Date(year, month, currentDay);
-        const dayOfWeek = currentDate.getDay();
-        const dayElement = document.createElement("td");
-        const isHoliday = isPhilippinesHoliday(currentDate);
-
-        // Create a container for the date text
-        const dateTextContainer = document.createElement("div");
-        dateTextContainer.className = "date-text-container";
-
-        // Check if the date is today's date
-        if (currentDate.toDateString() === today.toDateString()) {
-            dateTextContainer.classList.add("today");
-            // Add a click event listener to open the booking form for today's date
-            dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
-        } else if (currentDate < today) {
-            // Check if the date is in the past
-            dayElement.classList.add("past-date");
-            // Disable click event for past dates
-            dateTextContainer.style.pointerEvents = "none";
-        } else if (isHoliday) {
-            dayElement.classList.add("holiday"); // Add a class for holiday
-        } else {
-            // Add a click event listener to open the booking form for future dates
-            dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
-        }
-
-        // Create a span for each date
-        const dateSpan = document.createElement("span");
-        dateSpan.textContent = currentDay;
-
-        // Add the date text and text container to the cell
-        dateTextContainer.appendChild(dateSpan);
-        dayElement.appendChild(dateTextContainer);
-        currentRow.appendChild(dayElement);
-
-        // Event listener for the payment method radio buttons
-        document.querySelectorAll('input[type="radio"][name="PaymentMethod"]').forEach((radio) => {
-            radio.addEventListener("change", function () {
-                if (this.value === "online") {
-                    // Show the GCash booking form
-                    gcashBookingForm.style.display = "block";
-                } else {
-                    // Hide the GCash booking form
-                    gcashBookingForm.style.display = "none";
-                }
-            });
-        });
-
-        document.addEventListener("mousedown", function (event) {
-            if (bookingForm.style.display === "block" && !bookingForm.contains(event.target)) {
-                closeBookingForm();
-            }
-        });
-
-        bookingForm.addEventListener("mousedown", stopPropagation);
-
-        if (dayOfWeek === 6) {
-            currentRow = document.createElement("tr");
+            let currentRow = document.createElement("tr");
             daysElement.appendChild(currentRow);
-        }
 
-        currentDay++;
-    }
-}
+            for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
+                // Fill in leading empty cells with blanks
+                const dayElement = document.createElement("td");
+                dayElement.classList.add("past-date");
+                currentRow.appendChild(dayElement);
+            }
+
+            while (currentDay <= totalDays) {
+                const currentDate = new Date(year, month, currentDay);
+                const dayOfWeek = currentDate.getDay();
+                const dayElement = document.createElement("td");
+                const isHoliday = isPhilippinesHoliday(currentDate);
+
+                // Create a container for the date text
+                const dateTextContainer = document.createElement("div");
+                dateTextContainer.className = "date-text-container";
+
+                // Check if the date is today's date
+                if (currentDate.toDateString() === today.toDateString()) {
+                    dateTextContainer.classList.add("today");
+                    // Add a click event listener to open the booking form for today's date
+                    dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
+                } else if (currentDate < today) {
+                    // Check if the date is in the past
+                    dayElement.classList.add("past-date");
+                    // Disable click event for past dates
+                    dateTextContainer.style.pointerEvents = "none";
+                } else if (isHoliday) {
+                    dayElement.classList.add("holiday"); // Add a class for holiday
+                } else {
+                    // Add a click event listener to open the booking form for future dates
+                    dateTextContainer.addEventListener("click", () => openBookingForm(currentDate));
+                }
+
+                // Create a span for each date
+                const dateSpan = document.createElement("span");
+                dateSpan.textContent = currentDay;
+
+                // Add the date text and text container to the cell
+                dateTextContainer.appendChild(dateSpan);
+                dayElement.appendChild(dateTextContainer);
+                currentRow.appendChild(dayElement);
+
+                // Event listener for the payment method radio buttons
+                document.querySelectorAll('input[type="radio"][name="PaymentMethod"]').forEach((radio) => {
+                    radio.addEventListener("change", function () {
+                        if (this.value === "online") {
+                            // Show the GCash booking form
+                            gcashBookingForm.style.display = "block";
+                        } else {
+                            // Hide the GCash booking form
+                            gcashBookingForm.style.display = "none";
+                        }
+                    });
+                });
+
+                document.addEventListener("mousedown", function (event) {
+                    if (bookingForm.style.display === "block" && !bookingForm.contains(event.target)) {
+                        closeBookingForm();
+                    }
+                });
+
+                bookingForm.addEventListener("mousedown", stopPropagation);
+
+                if (dayOfWeek === 6) {
+                    currentRow = document.createElement("tr");
+                    daysElement.appendChild(currentRow);
+                }
+
+                currentDay++;
+            }
+        }
         
         function toggleBookingForm() {
             if (bookingForm.style.display === "block") {
