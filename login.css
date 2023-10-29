@@ -92,12 +92,12 @@
   .password-toggle-icon i {
     font-size: 18px;
     line-height: 1;
-    color: #333;
+    color: white;
     transition: color 0.3s ease-in-out;
   }
   
   .password-toggle-icon i:hover {
-    color: #000;
+    color: white;
   }
   
   /* Style the "Forgot password?" and "Signup now" links */
