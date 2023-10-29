@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['submit_email']) && $_POST['email'])
 {
-  mysql_connect('localhost','root','');
+  mysql_connect('localhost','root','pvbdb');
   mysql_select_db('sample');
   $select=mysql_query("select email,password from user where email='$email'");
   if(mysql_num_rows($select)==1)
@@ -19,9 +19,9 @@ if(isset($_POST['submit_email']) && $_POST['email'])
     // enable SMTP authentication
     $mail->SMTPAuth = true;                  
     // GMAIL username
-    $mail->Username = "your_email_id@gmail.com";
+    $mail->Username = "cedrickdangcalan515@gmail.com";
     // GMAIL password
-    $mail->Password = "your_gmail_password";
+    $mail->Password = "hwgy efyz ebfj ffvz";
     $mail->SMTPSecure = "ssl";  
     // sets GMAIL as the SMTP server
     $mail->Host = "smtp.gmail.com";
